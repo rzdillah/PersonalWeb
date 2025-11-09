@@ -3,52 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Project;
 
 class HomeController extends Controller
 {
-    // Use the same projects data as ProjectController
-    private function getFeaturedProjects()
-    {
-        return [
-            [
-                'id' => 1,
-                'slug' => 'platform-ecommerce-modern',
-                'title' => 'Platform E-commerce Modern',
-                'description' => 'Solusi e-commerce lengkap dengan dashboard admin, sistem pembayaran, dan UX yang optimal. Dibangun dengan focus pada performance dan user experience.',
-                'tags' => ['Vue.js', 'Laravel', 'Tailwind', 'MySQL'],
-                'image' => '/images/project-1.jpg',
-                'category' => 'web'
-            ],
-            [
-                'id' => 2,
-                'slug' => 'dashboard-analytics-kesehatan',
-                'title' => 'Dashboard Analytics Kesehatan',
-                'description' => 'Aplikasi dashboard untuk memantau data kesehatan pasien secara real-time dengan visualisasi data yang interaktif dan mudah dipahami.',
-                'tags' => ['React', 'D3.js', 'Node.js', 'MongoDB'],
-                'image' => '/images/project-1.jpg',
-                'category' => 'web'
-            ],
-            [
-                'id' => 3,
-                'slug' => 'aplikasi-mobile-banking',
-                'title' => 'Aplikasi Mobile Banking',
-                'description' => 'Manajemen keuangan yang aman dengan autentikasi biometrik.',
-                'tags' => ['React Native', 'Firebase', 'Stripe', 'Node.js'],
-                'image' => '/images/project-1.jpg',
-                'category' => 'mobile'
-            ],
-            [
-                'id' => 4,
-                'slug' => 'design-system-component-library',
-                'title' => 'Design System & Component Library',
-                'description' => 'Library komponen komprehensif untuk pengembangan UI yang konsisten.',
-                'tags' => ['Figma', 'Storybook', 'React', 'TypeScript'],
-                'image' => '/images/project-1.jpg',
-                'category' => 'tools'
-            ]
-        ];
-    }
-
     public function index()
     {
         $userData = [
@@ -65,8 +23,10 @@ class HomeController extends Controller
             ]
         ];
 
-        // Use featured projects with slugs
-        $featuredProjects = $this->getFeaturedProjects();
+        $featuredProjects = Project::featured()
+                                  ->ordered()
+                                  ->limit(4)
+                                  ->get();
 
         $skills = [
             ['Vue.js', 'text-green-400', 'bg-green-500/10'],
