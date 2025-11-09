@@ -20,7 +20,7 @@
                 <div class="lg:w-1/2">
                     <div class="h-80 rounded-2xl overflow-hidden">
                         <img 
-                            src="{{ $project->image ?? '/images/project-placeholder.jpg' }}" 
+                            src="{{ asset($project->image) }}" alt="{{ $project->title }}"
                             alt="{{ $project->title }}"
                             class="w-full h-full object-cover"
                             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
