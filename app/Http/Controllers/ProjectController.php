@@ -12,40 +12,35 @@ class ProjectController extends Controller
 
     public function index()
     {
-        $userData = $this->getUserData();
-
         $projects = Project::where('is_featured', true)
             ->orderBy('order')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('projects', compact('projects', 'userData'));
+        return view('projects', compact('projects'));
     }
 
     public function show($slug)
     {
-        $userData = $this->getUserData();
         $project = Project::where('slug', $slug)->firstOrFail();
 
-        return view('projects.show', compact('project', 'userData'));
+        return view('projects.show', compact('project'));
     }
 
     // ==================== ADMIN CRUD METHODS ====================
 
     public function adminIndex()
     {
-        $userData = $this->getUserData();
         $projects = Project::ordered()->get();
 
-        return view('admin.projects.index', compact('projects', 'userData'));
+        return view('admin.projects.index', compact('projects'));
     }
 
     public function create()
     {
-        $userData = $this->getUserData();
         $categories = ['web', 'mobile', 'tools', 'ai', 'design'];
 
-        return view('admin.projects.create', compact('categories', 'userData'));
+        return view('admin.projects.create', compact('categories'));
     }
 
     public function store(Request $request)
@@ -78,10 +73,9 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        $userData = $this->getUserData();
         $categories = ['web', 'mobile', 'tools', 'ai', 'design'];
 
-        return view('admin.projects.edit', compact('project', 'categories', 'userData'));
+        return view('admin.projects.edit', compact('project', 'categories'));
     }
 
     public function update(Request $request, Project $project)
@@ -132,23 +126,6 @@ class ProjectController extends Controller
     }
 
     // ==================== PRIVATE HELPER METHODS ====================
-
-    private function getUserData()
-    {
-        return [
-            'name' => 'Rizky Fikry Fadillah',
-            'tagline' => 'Frontend Developer',
-            'bio' => 'Seorang front-end developer yang berfokus pada pembuatan antarmuka web modern, responsif, dan mudah digunakan.',
-            'email' => 'rizkyfikryfadillah@gmail.com',
-            'location' => 'Bogor, Indonesia',
-            'social' => [
-                'github' => 'https://github.com/yourusername',
-                'linkedin' => 'https://linkedin.com/in/yourusername',
-                'instagram' => 'https://instagram.com/yourusername',
-                'tiktok' => 'https://tiktok.com/@yourusername',
-            ],
-        ];
-    }
 
     private function validateProject(Request $request, ?Project $project = null)
     {

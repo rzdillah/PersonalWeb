@@ -9,20 +9,6 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $userData = [
-            'name' => 'Rizky Fikry Fadillah',
-            'tagline' => 'Frontend Developer',
-            'bio' => 'Seorang front-end developer yang berfokus pada pembuatan antarmuka web modern, responsif, dan mudah digunakan.',
-            'email' => 'rizkyfikryfadillah@gmail.com',
-            'location' => 'Bogor, Indonesia',
-            'social' => [
-                'github' => 'https://github.com/yourusername',
-                'linkedin' => 'https://linkedin.com/in/yourusername', 
-                'instagram' => 'https://instagram.com/yourusername',
-                'tiktok' => 'https://tiktok.com/@yourusername',
-            ]
-        ];
-
         $featuredProjects = Project::featured()
                                   ->ordered()
                                   ->limit(4)
@@ -43,6 +29,6 @@ class HomeController extends Controller
             ['Docker', 'text-blue-400', 'bg-blue-500/10'],
         ];
 
-        return view('home', compact('userData', 'featuredProjects', 'skills'));
+        return view('home', compact( 'featuredProjects', 'skills'));
     }
 }

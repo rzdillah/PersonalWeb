@@ -11,21 +11,7 @@ class AdminAuthController extends Controller
 {
     public function showLogin()
     {
-        $userData = [
-            'name' => 'Rizky Fikry Fadillah',
-            'tagline' => 'Frontend Developer',
-            'bio' => 'Seorang front-end developer yang berfokus pada pembuatan antarmuka web modern, responsif, dan mudah digunakan.',
-            'email' => 'rizkyfikryfadillah@gmail.com',
-            'location' => 'Bogor, Indonesia',
-            'social' => [
-                'github' => 'https://github.com/yourusername',
-                'linkedin' => 'https://linkedin.com/in/yourusername',
-                'instagram' => 'https://instagram.com/yourusername',
-                'tiktok' => 'https://tiktok.com/@yourusername',
-            ],
-        ];
-
-        return view('admin.login', compact('userData'));
+        return view('admin.login');
     }
 
     public function login(Request $request)
